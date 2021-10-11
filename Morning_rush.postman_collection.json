@@ -1,0 +1,1091 @@
+{
+	"info": {
+		"_postman_id": "fc485f08-60ce-4f16-9453-b9ef354f8035",
+		"name": "Morning_rush",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get a starting page on prod",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Food Delivery Site Controller\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://delikuru.jp/",
+					"protocol": "https",
+					"host": [
+						"delikuru",
+						"jp"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authrorization on prod (as admin)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting a token value\", function () {\r",
+							"    value = pm.response.headers.get(\"authorization\")\r",
+							"    pm.environment.set(\"TokenProd\", value);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Getting a token value\", function () {\r",
+							"    value = pm.response.headers.get(\"refresh-token\")\r",
+							"    pm.environment.set(\"RefreshTokenProd\", value);\r",
+							"});\r",
+							"\r",
+							"const schema = {\r",
+							"\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"message\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"id\": {\r",
+							"          \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"active\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"status\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"posIntegrationStatus\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"roles\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": [\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"id\": {\r",
+							"                  \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"name\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"id\",\r",
+							"                \"name\"\r",
+							"              ]\r",
+							"            }\r",
+							"          ]\r",
+							"        },\r",
+							"        \"first_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"shop_id\": {\r",
+							"          \"type\": \"null\"\r",
+							"        },\r",
+							"        \"email_address\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"contact_number\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"restaurant_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"company_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"consume_orders\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"created_date\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_login\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"available_platforms\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": [\r",
+							"            {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            {\r",
+							"              \"type\": \"string\"\r",
+							"            }\r",
+							"          ]\r",
+							"        },\r",
+							"        \"ubereats_accounts\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        },\r",
+							"        \"demaecan_accounts\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"id\",\r",
+							"        \"active\",\r",
+							"        \"status\",\r",
+							"        \"posIntegrationStatus\",\r",
+							"        \"roles\",\r",
+							"        \"first_name\",\r",
+							"        \"last_name\",\r",
+							"        \"shop_id\",\r",
+							"        \"email_address\",\r",
+							"        \"contact_number\",\r",
+							"        \"restaurant_name\",\r",
+							"        \"company_name\",\r",
+							"        \"consume_orders\",\r",
+							"        \"created_date\",\r",
+							"        \"last_login\",\r",
+							"        \"available_platforms\",\r",
+							"        \"ubereats_accounts\",\r",
+							"        \"demaecan_accounts\"\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"message\",\r",
+							"    \"data\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var responseJSON = JSON.parse(responseBody);\r",
+							"tests['Check message'] = responseJSON.message == \"User is found\";\r",
+							"tests['Check active'] = responseJSON.data.active == true;\r",
+							"tests['Check status'] = responseJSON.data.status == \"ACTIVATED\";\r",
+							"tests['Check posIntegrationStatus'] = responseJSON.data.posIntegrationStatus == \"PENDING\";\r",
+							"tests['Check role id'] = responseJSON.data.roles[0].id == 1;\r",
+							"tests['Check role name'] = responseJSON.data.roles[0].name == \"SUPER_ADMIN\";\r",
+							"tests['Check email'] = responseJSON.data.email_address == \"super-admin@metroengines.jp\";\r",
+							"tests['Check consume_orders'] = responseJSON.data.consume_orders == false;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"super-admin@metroengines.jp\",\r\n    \"password\": \"!MEfdsc123_!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prodBaseURL}}/fdsc/auth/login",
+					"host": [
+						"{{prodBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View admin's account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const schema = {\r",
+							"\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"message\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"id\": {\r",
+							"          \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"active\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"status\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"posIntegrationStatus\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"roles\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": [\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"id\": {\r",
+							"                  \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"name\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"id\",\r",
+							"                \"name\"\r",
+							"              ]\r",
+							"            }\r",
+							"          ]\r",
+							"        },\r",
+							"        \"first_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"shop_id\": {\r",
+							"          \"type\": \"null\"\r",
+							"        },\r",
+							"        \"email_address\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"contact_number\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"restaurant_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"company_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"consume_orders\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"created_date\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_login\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"available_platforms\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": [\r",
+							"            {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            {\r",
+							"              \"type\": \"string\"\r",
+							"            }\r",
+							"          ]\r",
+							"        },\r",
+							"        \"ubereats_accounts\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        },\r",
+							"        \"demaecan_accounts\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"id\",\r",
+							"        \"active\",\r",
+							"        \"status\",\r",
+							"        \"posIntegrationStatus\",\r",
+							"        \"roles\",\r",
+							"        \"first_name\",\r",
+							"        \"last_name\",\r",
+							"        \"shop_id\",\r",
+							"        \"email_address\",\r",
+							"        \"contact_number\",\r",
+							"        \"restaurant_name\",\r",
+							"        \"company_name\",\r",
+							"        \"consume_orders\",\r",
+							"        \"created_date\",\r",
+							"        \"last_login\",\r",
+							"        \"available_platforms\",\r",
+							"        \"ubereats_accounts\",\r",
+							"        \"demaecan_accounts\"\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"message\",\r",
+							"    \"data\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var responseJSON = JSON.parse(responseBody);\r",
+							"tests['Check message'] = responseJSON.message == \"Response with user account\";\r",
+							"tests['Check active'] = responseJSON.data.active == true;\r",
+							"tests['Check status'] = responseJSON.data.status == \"ACTIVATED\";\r",
+							"tests['Check posIntegrationStatus'] = responseJSON.data.posIntegrationStatus == \"PENDING\";\r",
+							"tests['Check role id'] = responseJSON.data.roles[0].id == 1;\r",
+							"tests['Check role name'] = responseJSON.data.roles[0].name == \"SUPER_ADMIN\";\r",
+							"tests['Check email'] = responseJSON.data.email_address == \"super-admin@metroengines.jp\";\r",
+							"tests['Check consume_orders'] = responseJSON.data.consume_orders == false;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TokenProd}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{prodBaseURL}}/fdsc/users/{{userIDProdA}}",
+					"host": [
+						"{{prodBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"users",
+						"{{userIDProdA}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users in a system on prod",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"ekaterina.kachura@metroengines.jp\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TokenProd}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{prodBaseURL}}/fdsc/users?keyword={{keywordUsersProd}}&limit=50&offset=1",
+					"host": [
+						"{{prodBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"users"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "{{keywordUsersProd}}"
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						},
+						{
+							"key": "offset",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting a token value\", function () {\r",
+							"    value = pm.response.headers.get(\"authorization\")\r",
+							"    pm.environment.set(\"TokenProd\", value);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Getting a token value\", function () {\r",
+							"    value = pm.response.headers.get(\"refresh-token\")\r",
+							"    pm.environment.set(\"RefreshTokenProd\", value);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{prodBaseURL}}/fdsc/auth/refresh/token?token={{RefreshTokenProd}}",
+					"host": [
+						"{{prodBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"auth",
+						"refresh",
+						"token"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{RefreshTokenProd}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout on prod (as admin)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);\r",
+							"tests['Check message'] = responseJSON.message == \"User is logout\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TokenProd}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refresh_token\": \"{{RefreshTokenProd}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prodBaseURL}}/fdsc/auth/{{userIDProdA}}/logout",
+					"host": [
+						"{{prodBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"auth",
+						"{{userIDProdA}}",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a starting page on stage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Food Delivery Site Controller\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.delikuru.jp/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"delikuru",
+						"jp"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authrorization on stage (as admin)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting a token value\", function () {\r",
+							"    value = pm.response.headers.get(\"authorization\")\r",
+							"    pm.environment.set(\"TokenStage\", value);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Getting a token value\", function () {\r",
+							"    value = pm.response.headers.get(\"refresh-token\")\r",
+							"    pm.environment.set(\"RefreshTokenStage\", value);\r",
+							"});\r",
+							"\r",
+							"const schema = {\r",
+							"  \r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"message\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"id\": {\r",
+							"          \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"active\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"status\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"posIntegrationStatus\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"roles\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": [\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"id\": {\r",
+							"                  \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"name\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"id\",\r",
+							"                \"name\"\r",
+							"              ]\r",
+							"            }\r",
+							"          ]\r",
+							"        },\r",
+							"        \"first_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"shop_id\": {\r",
+							"          \"type\": \"null\"\r",
+							"        },\r",
+							"        \"email_address\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"contact_number\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"restaurant_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"company_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"consume_orders\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"created_date\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_login\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"available_platforms\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        },\r",
+							"        \"ubereats_accounts\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        },\r",
+							"        \"demaecan_accounts\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"id\",\r",
+							"        \"active\",\r",
+							"        \"status\",\r",
+							"        \"posIntegrationStatus\",\r",
+							"        \"roles\",\r",
+							"        \"first_name\",\r",
+							"        \"last_name\",\r",
+							"        \"shop_id\",\r",
+							"        \"email_address\",\r",
+							"        \"contact_number\",\r",
+							"        \"restaurant_name\",\r",
+							"        \"company_name\",\r",
+							"        \"consume_orders\",\r",
+							"        \"created_date\",\r",
+							"        \"last_login\",\r",
+							"        \"available_platforms\",\r",
+							"        \"ubereats_accounts\",\r",
+							"        \"demaecan_accounts\"\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"message\",\r",
+							"    \"data\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var responseJSON = JSON.parse(responseBody);\r",
+							"tests['Check message'] = responseJSON.message == \"User is found\";\r",
+							"tests['Check active'] = responseJSON.data.active == true;\r",
+							"tests['Check status'] = responseJSON.data.status == \"ACTIVATED\";\r",
+							"tests['Check posIntegrationStatus'] = responseJSON.data.posIntegrationStatus == \"PENDING\";\r",
+							"tests['Check role id'] = responseJSON.data.roles[0].id == 1;\r",
+							"tests['Check role name'] = responseJSON.data.roles[0].name == \"SUPER_ADMIN\";\r",
+							"tests['Check email'] = responseJSON.data.email_address == \"fdsc-super-admin@gmail.com\";\r",
+							"tests['Check consume_orders'] = responseJSON.data.consume_orders == true;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"fdsc-super-admin@gmail.com\",\r\n    \"password\": \"Admin!111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{stageBaseURL}}/fdsc/auth/login",
+					"host": [
+						"{{stageBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users in a system on stage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"zarubanasot@gmail.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TokenStage}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{stageBaseURL}}/fdsc/users?keyword={{keywordUsersStage}}&limit=50&offset=1",
+					"host": [
+						"{{stageBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"users"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "{{keywordUsersStage}}"
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						},
+						{
+							"key": "offset",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout on stage (as admin)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);\r",
+							"tests['Check message'] = responseJSON.message == \"User is logout\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TokenStage}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refresh_token\": \"{{RefreshTokenStage}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{stageBaseURL}}/fdsc/auth/{{UserIDStageA}}/logout",
+					"host": [
+						"{{stageBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"auth",
+						"{{UserIDStageA}}",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorization on stage (as client)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Getting a token value\", function () {\r",
+							"    value = pm.response.headers.get(\"authorization\")\r",
+							"    pm.environment.set(\"TokenStage\", value);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Getting a token value\", function () {\r",
+							"    value = pm.response.headers.get(\"refresh-token\")\r",
+							"    pm.environment.set(\"RefreshTokenStage\", value);\r",
+							"});\r",
+							"\r",
+							"const schema = {\r",
+							"  \r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"message\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"id\": {\r",
+							"          \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"active\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"status\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"posIntegrationStatus\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"roles\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": [\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"id\": {\r",
+							"                  \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"name\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"id\",\r",
+							"                \"name\"\r",
+							"              ]\r",
+							"            }\r",
+							"          ]\r",
+							"        },\r",
+							"        \"first_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"shop_id\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"email_address\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"contact_number\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"restaurant_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"company_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"consume_orders\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"created_date\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_login\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"available_platforms\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        },\r",
+							"        \"ubereats_accounts\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        },\r",
+							"        \"demaecan_accounts\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"id\",\r",
+							"        \"active\",\r",
+							"        \"status\",\r",
+							"        \"posIntegrationStatus\",\r",
+							"        \"roles\",\r",
+							"        \"first_name\",\r",
+							"        \"last_name\",\r",
+							"        \"shop_id\",\r",
+							"        \"email_address\",\r",
+							"        \"contact_number\",\r",
+							"        \"restaurant_name\",\r",
+							"        \"company_name\",\r",
+							"        \"consume_orders\",\r",
+							"        \"created_date\",\r",
+							"        \"last_login\",\r",
+							"        \"available_platforms\",\r",
+							"        \"ubereats_accounts\",\r",
+							"        \"demaecan_accounts\"\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"message\",\r",
+							"    \"data\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"var responseJSON = JSON.parse(responseBody);\r",
+							"tests['Check message'] = responseJSON.message == \"User is found\";\r",
+							"tests['Check active'] = responseJSON.data.active == true;\r",
+							"tests['Check status'] = responseJSON.data.status == \"ACTIVATED\";\r",
+							"tests['Check posIntegrationStatus'] = responseJSON.data.posIntegrationStatus == \"INTEGRATED\";\r",
+							"tests['Check role id'] = responseJSON.data.roles[0].id == 2;\r",
+							"tests['Check role name'] = responseJSON.data.roles[0].name == \"CLIENT\";\r",
+							"tests['Check email'] = responseJSON.data.email_address == \"zarubanasot@gmail.com\";\r",
+							"tests['Check consume_orders'] = responseJSON.data.consume_orders == true;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"zarubanasot@gmail.com\",\r\n    \"password\": \"Fasterlight77\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{stageBaseURL}}/fdsc/auth/login",
+					"host": [
+						"{{stageBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout on stage (as client)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);\r",
+							"tests['Check message'] = responseJSON.message == \"User is logout\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TokenStage}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refresh_token\": \"{{RefreshTokenStage}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{stageBaseURL}}/fdsc/auth/{{userIDStageC}}/logout",
+					"host": [
+						"{{stageBaseURL}}"
+					],
+					"path": [
+						"fdsc",
+						"auth",
+						"{{userIDStageC}}",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "stageBaseURL",
+			"value": "https://dev-back-end.delikuru.jp"
+		},
+		{
+			"key": "prodBaseURL",
+			"value": "https://back-end.delikuru.jp"
+		}
+	]
+}
