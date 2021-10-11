@@ -8,4 +8,3 @@ jobs:
       - checkout
       - newman/newman-run:
           collection: ./Morning_rush.postman_collection.json
-          environment: ./FDSC_variables.postman_environment.json
